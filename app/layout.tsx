@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/src/components/Navbar";
 
 
 export const metadata: Metadata = {
@@ -15,14 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="relative min-h-screen bg-cover bg-center"
-          style={{ backgroundImage: "url('/back.png')" }}>
-            <div className="absolute inset-0 backdrop-blur-[1px] "></div>
-            <div>
-              <div className="relative z-10">
-                {children}
-              </div>
-            </div>
+      <body>
+        {children}
       </body>
     </html>
   );
