@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from 'next/navigation';
-import { ArrowUpRight, Github, Linkedin} from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Github, Linkedin} from 'lucide-react';
 import { useState } from 'react';
 import pkg from "@/package.json";
 import Link from 'next/link';
@@ -9,11 +9,13 @@ import Link from 'next/link';
 export default function Home() {
   const router = useRouter();
   const [username, setUsername] = useState("");
+  const [error, setError] = useState('')
 
   const rediretcHandler = () => {
     if (!username) {
-      window.alert("pls enter a username");
+      setError("Enter your Username")
     } else {
+      // setError("Enter your Username")
       router.push(`/intro/${username}`);
     }
   };
@@ -47,7 +49,7 @@ export default function Home() {
 
             <div className='flex justify-center'>
               <p className='px-1 py-2 rounded-[5px] bg-fuchsia-300/50 backdrop-blur-2xl border border-transparent text-3xl instrument-serif-italic-bold'>
-                You coded. You shipped. You grew. See your 2025 coding Journey in motion.</p>
+                Your year in code, analyzed by AI. The ultimate 2025 GitHub Wrapped is here.</p>
             </div>
 
             <div className="flex justify-center ">
@@ -59,6 +61,7 @@ export default function Home() {
                 type="text"  
                 placeholder="GitHub username..."
                 onChange={e=>{
+                  setError("")
                   setUsername(e.target.value)
                 }}
                 className="w-[85%] bg-transparent h-10 outline-none text-3xl instrument-serif-italic"
@@ -76,8 +79,17 @@ export default function Home() {
           </div>
         </div>
 
+        <div className='z-20'>
+          {error && (
+            <div className='border-transparent rounded-sm text-white px-2 py-1 backdrop-blur-2xl'>
+              {error}
+            </div>)}
+        </div>
+
         <div className="absolute bottom-10 animate-bounce">
-          <p className="text-fuchsia-200 font-bold uppercase tracking-widest text-xs">Scroll</p>
+          <p className="text-fuchsia-200 font-bold uppercase tracking-widest text-xs">
+            <ArrowDown/>
+          </p>
         </div>
 
       </section>
@@ -89,7 +101,7 @@ export default function Home() {
       <h2 className="text-4xl font-black italic tracking-tighter">
         GITHUB-<span className="text-fuchsia-500">WRAPPED</span>
       </h2>
-      <p className="text-xl font-medium leading-tight tracking-tighter">
+      <p className="text-xl font-medium leading-tight tracking-tighter italic">
         Visualize your commit history, discover your coding persona, and share your year in review.
       </p>
     </div>
