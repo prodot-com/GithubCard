@@ -1,22 +1,48 @@
 "use client"
 
 import { useRouter } from 'next/navigation';
-import { ArrowDown, ArrowUpRight, Github, Linkedin} from 'lucide-react';
-import { useState } from 'react';
+import { ArrowDown, ArrowUpRight, Github, HomeIcon, Linkedin} from 'lucide-react';
+import { useEffect, useState } from 'react';
 import pkg from "@/package.json";
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [error, setError] = useState('')
+  const [userDetails, setUserDetails] = useState({})
+
+  useEffect(()=>{
+    
+      async function fetchUsername(username: string){
+        try {
+          
+            const res = await fetch("/api/user",{
+            method: "POST",
+            body: JSON.stringify({
+              username
+            })
+          })
+
+          const data = await res.json();
+          console.log(data)
+        } catch (error) {
+          console.log("Error", error)
+        }
+        
+      }
+
+      fetchUsername(username)
+
+  },[username])
 
   const rediretcHandler = () => {
     if (!username) {
       setError("Enter your Username")
     } else {
-      // setError("Enter your Username")
-      router.push(`/intro/${username}`);
+      setError("Enter your Username")
+      // router.push(`/intro/${username}`);
     }
   };
 
@@ -37,7 +63,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className='flex flex-col min-h-137.5 justify-around'>
+          <div className='flex flex-col min-h-90 justify-between'>
             <div className="flex justify-center">
               <p
               className="shadow-2xl px-4 border border-transparent py-3 text-8xl instrument-serif-italic-bold text-black backdrop-blur-xl
@@ -77,6 +103,43 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+        <div className="mt-10 flex justify-center">
+          <div className="relative w-[370px] rounded-[5px] bg-fuchsia-200/20 backdrop-blur-2xl border border-white/20 shadow-xl p-4">
+
+            <div className="flex gap-7 items-center">
+              <img
+                src="https://avatars.githubusercontent.com/u/6751787?u=69a6486b20fc980615e51457f6a5b56103cea295&v=4"
+                alt="profile"
+                width={100}
+                height={100}
+                className="rounded-full border-2 border-black shadow-md"
+              />
+
+              
+              <div className="flex flex-col">
+                <p className="text-xl font-black text-black leading-tight">
+                  Theo Browne
+                </p>
+
+                <p className="text-sm font-bold italic text-black/70">
+                  @t3dotgg
+                </p>
+
+                <p className="mt-2 text-xs font-medium text-black/60 flex items-center gap-1">
+                  <HomeIcon className='w-4 h-4'/> San Francisco, CA
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-2 border-t border-black/10 pt-4">
+              <p className="text-sm text-black font-medium italic text-center">
+                “Im just here for the vibes, man.”
+              </p>
+            </div>
+          </div>
+        </div>
+
         </div>
 
         <div className='z-20'>

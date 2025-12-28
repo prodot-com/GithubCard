@@ -27,12 +27,11 @@ export default function LanguagePage({ languages }: LanguagePageProps) {
   );
 
   return (
-    <div className="h-screen w-full bg-neutral-950 text-white flex flex-col items-center justify-center relative overflow-hidden px-4">
+    <div className="h-screen w-full bg-black text-white flex flex-col items-center justify-center relative overflow-hidden px-4">
 
       <div className="absolute inset-0 opacity-[0.03] font-mono text-xs select-none pointer-events-none p-4 overflow-hidden">
         {[...Array(20)].map((_, i) => (
           <div key={i} className="whitespace-nowrap italic">
-            {`console.log("Shipping 2025"); function deploy() { pushToProd(); } `.repeat(10)}
           </div>
         ))}
       </div>

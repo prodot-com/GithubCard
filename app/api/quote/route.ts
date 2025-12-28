@@ -5,6 +5,8 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY!,
 });
 
+const systemQuote = "You are a witty, slightly sarcastic narrator for a GitHub Wrapped-style experience. Write ONE sharp, memorable sentence (max 20 words). Tone: clever, confident, playful—not mean. Reference the developer’s persona, primary language, or coding habits subtly. Avoid emojis. Avoid clichés. Make it feel shareable."
+
 type WrappedQuoteRequest = {
   persona: string;
   language: string;
@@ -23,12 +25,11 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "system",
-          content:
-            "You are a witty AI narrator for a GitHub Wrapped app. Write a 1-sentence snarky vibe check. Max 25 words.",
+          content: systemQuote,
         },
         {
           role: "user",
-          content: `Persona: ${persona}, Language: ${language}, Commits: ${commitCount}.`,
+          content: `Persona: ${persona},Primary Language: ${language}, Commits: ${commitCount}.`,
         },
       ],
     });
