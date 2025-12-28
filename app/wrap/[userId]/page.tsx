@@ -15,32 +15,40 @@ export default async function UserIntroPage({ params }: Props) {
 
   const statsQuery = `
     query ($username: String!) {
-      user(login: $username) {
-        repositories(privacy: PUBLIC) {
-          totalCount
+  user(login: $username) {
+    repositories(privacy: PUBLIC) {
+      totalCount
+    }
+    contributionsCollection(
+      from: "2025-01-01T00:00:00Z",
+      to: "2025-12-31T23:59:59Z"
+    ) {
+      contributionCalendar {
+        totalContributions
+      }
+      totalCommitContributions
+      totalPullRequestContributions
+      totalIssueContributions
+      totalRepositoryContributions
+      commitContributionsByRepository(maxRepositories: 5) {
+        repository {
+          name
+          owner {
+            login
+          }
+          primaryLanguage {
+            name
+            color
+          }
         }
-        contributionsCollection(
-          from: "2025-01-01T00:00:00Z",
-          to: "2025-12-31T23:59:59Z"
-        ) {
-          contributionCalendar {
-            totalContributions
-          }
-          totalCommitContributions
-          totalPullRequestContributions
-          totalIssueContributions
-          totalRepositoryContributions
-          commitContributionsByRepository(maxRepositories: 5) {
-            repository {
-              name
-              owner {
-                login
-              }
-            }
-          }
+        contributions {
+          totalCount
         }
       }
     }
+  }
+}
+
   `;
 
   const timingQuery = `
@@ -75,9 +83,10 @@ export default async function UserIntroPage({ params }: Props) {
   );
 
   const user = statsRes.data.data.user;
-//   console.log(user)
+  // console.log(user.contributionsCollection.commitContributionsByRepository)
   const repos = user.contributionsCollection.commitContributionsByRepository ?? [];
 
+  // const commitLang = 
 
     const commitTimings = await Promise.all(
     repos.map((repo: any) =>

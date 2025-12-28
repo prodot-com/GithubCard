@@ -8,20 +8,22 @@ import PersonaPage from "@/src/components/Persona";
 import { detectPersona } from "@/src/utils/persona";
 import { getBusiestDay } from "@/src/utils/BusyDay";
 import GrindPage from "@/src/components/Grind";
+import { detectTopLanguages } from "@/src/utils/CommitLang";
+import LanguagePage from "@/src/components/Lang";
 
 type RepoType = {
-  contribution: {
-    totalcount: number;
-  };
   repository: {
-    name: string;
+    name: string,
     owner: {
-      login: string;
-    };
+        login: string
+    },
     primaryLanguage: {
       name: string;
-      color: string | null;
-    } | null;
+      color: string;
+} | null;
+  };
+  contributions: {
+    totalCount: number;
   };
 };
 
@@ -42,16 +44,22 @@ export default function Slider({
   contributedRepo,
   totalCommits,
   commitHour,
-  commitDates
+  commitDates,
+  repoDetails
 }: Props) {
   const [step, setStep] = useState<number>(1);
-  const [repo, setRepo] = useState<RepoType[]>([]);
+  const [maxStep, setMaxStep] = useState<number>(5);
+//   const [repo, setRepo] = useState<RepoType[]>([]);
 
+//   console.log(repoDetails)
   const personaX = detectPersona(commitHour, commitDates, totalCommits);
 //   console.log(personaX);
 
   const busyDay = getBusiestDay(commitDates);
-  console.log(busyDay)
+//   console.log(busyDay)
+
+    const languages = detectTopLanguages(repoDetails)
+    console.log(languages)
 
   return (
     <div className="min-h-screen bg-black text-white grid grid-cols-4 gap-4 relative overflow-hidden">
@@ -82,6 +90,10 @@ export default function Slider({
             <GrindPage busiestDay={busyDay.date} commitCount={busyDay.commits}/>
         )}
 
+        {step === 4 && (
+            <LanguagePage languages={languages}/>
+        )}
+
         <ProgressBar step={step} />
       </div>
 
@@ -89,7 +101,9 @@ export default function Slider({
       <div className="flex justify-center items-center">
         <button
           onClick={() => setStep((s) => s + 1)}
-          className="group p-3 cursor-pointer rounded-full hover:bg-neutral-700"
+          disabled={step === maxStep}
+          className="group p-3 cursor-pointer rounded-full hover:bg-neutral-700
+          disabled:opacity-30 disabled:cursor-not-allowed"
         >
           <ArrowRight
             className="transition-all duration-150
