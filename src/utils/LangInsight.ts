@@ -10,9 +10,6 @@ export type LanguageInsight = {
   stat: string;
 };
 
-/**
- * Generates a narrative insight based on language usage.
- */
 export function getLanguageInsight(
   languages: LanguageUsage[]
 ): LanguageInsight {
@@ -24,7 +21,6 @@ export function getLanguageInsight(
     };
   }
 
-  // Ensure sorted (highest commits first)
   const sorted = [...languages].sort((a, b) => b.commits - a.commits);
 
   const totalCommits = sorted.reduce((sum, l) => sum + l.commits, 0);
@@ -33,7 +29,6 @@ export function getLanguageInsight(
 
   const mainPct = Math.round((main.commits / totalCommits) * 100);
 
-  // 1️⃣ Hardcore Specialist
   if (mainPct >= 70 && totalCommits >= 200) {
     return {
       title: "Pure specialization.",
@@ -42,7 +37,7 @@ export function getLanguageInsight(
     };
   }
 
-  // 2️⃣ Clear favorite with backup
+
   if (mainPct >= 55 && second) {
     return {
       title: "A clear favorite.",
@@ -51,7 +46,7 @@ export function getLanguageInsight(
     };
   }
 
-  // 3️⃣ Balanced dual-stack developer
+
   if (second && mainPct < 55 && mainPct > 40) {
     return {
       title: "Balanced stack.",
@@ -60,7 +55,7 @@ export function getLanguageInsight(
     };
   }
 
-  // 4️⃣ Polyglot year
+
   if (sorted.length >= 4) {
     return {
       title: "Polyglot energy.",
@@ -69,7 +64,7 @@ export function getLanguageInsight(
     };
   }
 
-  // 5️⃣ Low-volume year
+
   if (totalCommits < 100) {
     return {
       title: "A quiet year.",
@@ -78,7 +73,7 @@ export function getLanguageInsight(
     };
   }
 
-  // Default fallback
+
   return {
     title: "A distinct flavor.",
     description: `You wrote ${main.language} like a native.`,

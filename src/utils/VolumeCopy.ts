@@ -2,8 +2,8 @@ export const getVolumeCopy = (commits: number) => {
   if (commits >= 1500) {
     return {
       title: "You were unstoppable.",
-      subtitle: "This wasn’t coding — this was domination.",
-      footer: "Our AI flagged this year as borderline legendary."
+      subtitle: "This wasn't coding — this was domination.",
+      footer: "This year crossed into legendary territory."
     };
   }
 
