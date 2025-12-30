@@ -11,7 +11,10 @@ type userType = {
   login: string,
   name: string,
   location: string,
-  bio: string
+  bio: string,
+  followers: {totalCount: number};
+  following: {totalCount: number};
+  repositories: {totalCount: number};
 }
 
 export default function Home() {
@@ -44,10 +47,10 @@ useEffect(() => {
       }
 
       const data = await res.json();
-if (!data || Object.keys(data).length === 0) {
-  setUserDetails(null);
-  return;
-}
+      if (!data || Object.keys(data).length === 0) {
+        setUserDetails(null);
+        return;
+      }
       console.log(data)
      
       setUserDetails(data);
@@ -63,7 +66,7 @@ if (!data || Object.keys(data).length === 0) {
 }, [username]);
 
 useEffect(() => {
-  if (username.trim() && userDetails?.login) {
+  if (username.trim() && userDetails?.login && username.trim() === userDetails?.login) {
     setButtonEnable(true);
   } else {
     setButtonEnable(false);
@@ -139,39 +142,68 @@ const rediretcHandler = () => {
 
       {userDetails?.login ? (
         <div className="mt-5 flex justify-center px-10 md:px-4">
-          <div className="relative w-full max-w-92.5 rounded-[5px] bg-fuchsia-200/20 backdrop-blur-2xl border border-white/20 shadow-xl p-4 md:p-6">
-            <div className="flex flex-row gap-7 md:gap-7 items-center text-left">
+          <div className="relative w-full max-w-100 rounded-[5px] bg-fuchsia-200/20 backdrop-blur-2xl border border-white/20 shadow-xl p-4 md:p-3">
+            <div className="flex flex-row gap-7 items-center text-left">
               {userDetails?.avatarUrl && (
                 <img
-                  src={userDetails?.avatarUrl}
+                  src={userDetails.avatarUrl}
                   alt="profile"
                   width={100}
                   height={100}
-                  className="rounded-full border-2 border-black shadow-md w-20 h-20 md:w-25 md:h-25"
-                /> 
+                  className="rounded-full border-2 border-black shadow-md w-20 h-20 md:w-24 md:h-24"
+                />
               )}
-              
-              <div className="flex flex-col">
-                {userDetails?.name && (
-                  <p className="text-xl font-black text-black leading-tight">
-                    {userDetails?.name}
-                  </p>
-                )}
-                {userDetails?.login && (
-                  <p className="text-sm font-bold italic text-black/70">
-                    @{userDetails?.login}
-                  </p>
-                )}
-                {userDetails?.location && (
-                  <p className="mt-2 text-xs font-medium text-black/60 flex items-center justify-center sm:justify-start gap-1">
-                    <HomeIcon className='w-4 h-4'/> {userDetails?.location}
-                  </p>
-                )}
+
+              <div className="flex flex-col cursor-pointer"
+              onClick={()=>{
+                setUsername(userDetails?.login)
+              }}
+              >
+                <div className="flex flex-col md:flex-row md:gap-2 md:items-center">
+                  {userDetails?.login && (
+                    <p className="text-xl font-black text-black leading-tight">
+                      @{userDetails.login}
+                    </p>
+                  )}
+
+                  {userDetails?.name && (
+                    <p className="text-[16px] font-bold italic text-black/70">
+                      {userDetails.name}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  {userDetails?.followers?.totalCount !== undefined && (
+                    <p className="text-sm pt-1 font-bold italic text-black/70">
+                      Followers: {userDetails.followers.totalCount}
+                    </p>
+                  )}
+
+                  {userDetails?.following?.totalCount !== undefined && (
+                    <p className="text-sm pt-1 font-bold italic text-black/70">
+                      Following: {userDetails.following.totalCount}
+                    </p>
+                  )}
+
+                  {userDetails?.repositories?.totalCount !== undefined && (
+                    <p className="text-sm pt-1 font-bold italic text-black/70">
+                      Repositories: {userDetails.repositories.totalCount}
+                    </p>
+                  )}
+
+                  {userDetails?.location && (
+                    <p className="mt-2 text-xs font-medium text-black/60 flex items-center gap-1">
+                      <HomeIcon className="w-4 h-4" />
+                      {userDetails.location}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
 
             {userDetails?.bio && (
-              <div className="mt-4 border-t border-black/10 pt-4">
+              <div className="mt-4 border-t border-black/10 pt-1">
                 <p className="text-sm text-black font-medium italic text-center">
                   {`"${userDetails?.bio}"`}
                 </p>

@@ -12,21 +12,7 @@ export async function POST(req: Request) {
     const response = await axios.post(
       "https://api.github.com/graphql",
       {
-        query: `
-          query SearchUsers($query: String!) {
-            search(query: $query, type: USER, first: 1) {
-              nodes {
-                ... on User {
-                  login
-                  avatarUrl
-                  location
-                  name
-                  bio
-                }
-              }
-            }
-          }
-        `,
+        query: `query SearchUsers($query: String!) { search(query: $query, type: USER, first: 1) { nodes { ... on User { login name avatarUrl location bio followers {totalCount} following{totalCount} repositories{totalCount} } } } }`,
         variables: {
           query: `${username} in:login`,
         },
@@ -40,6 +26,7 @@ export async function POST(req: Request) {
     );
 
     const users = response.data.data.search.nodes[0];
+    // console.log(users)
 
     return NextResponse.json(users);
   } catch (error) {
