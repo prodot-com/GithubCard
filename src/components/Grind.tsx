@@ -45,7 +45,7 @@ export default function GrindPage({busiestDay,commitCount}:grindType) {
         </motion.div>
 
         <p className="text-xl text-neutral-500 max-w-sm italic">
-          {grind.ai}
+          {grind.insight}
         </p>
       </div>
 

@@ -14,7 +14,7 @@ type quoteReqType = {
 export default function QuotePage({ persona, language, commitCount , onQuoteGenerated}: quoteReqType) {
   const [quote, setQuote] = useState("");
   const [displayedQuote, setDisplayedQuote] = useState("");
-  const [status, setStatus] = useState("idle"); // idle, analyzing, typing, finished
+  const [status, setStatus] = useState("idle");
   const [isStarted, setIsStarted] = useState(false);
 
   const fetchAIVerdict = async () => {
