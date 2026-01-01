@@ -5,7 +5,7 @@ import React, { useRef } from "react";
 import * as htmlToImage from "html-to-image";
 import { Download, Share2, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
-import confetti from "canvas-confetti"
+import confetti from "canvas-confetti";
 
 type WrappedCardProps = {
   username: string;
