@@ -124,7 +124,7 @@ export default function Slider(props: Props) {
               className="flex items-center gap-2 cursor-pointer bg-white text-black md:px-5 md:py-2 px-2 py-2 rounded-[5px] font-bold text-sm hover:bg-zinc-200 transition-all hover:scale-105"
             >
               <Sparkles size={16} />
-              Finalize
+              Get Card
             </button>
           ) : (
             <button

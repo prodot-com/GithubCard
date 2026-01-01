@@ -191,7 +191,7 @@ export default function QuotePage({ persona, language, commitCount, onQuoteGener
                     <p className="text-zinc-400 font-mono text-[9px] md:text-[9px] uppercase tracking-[0.3em] md:tracking-[0.5em] px-4">
                       <span>OUTPUT</span> LOCKED - CONTINUE
                     </p>
-                    <p className="text-zinc-400 font-mono text-[9px] md:text-[9px] uppercase tracking-[0.3em] md:tracking-[0.5em] px-4">
+                    <p className="text-zinc-400 font-mono text-[10px] md:text-[12px] uppercase tracking-[0.3em] md:tracking-[0.5em] px-4">
                       Collect your <span className="text-white">Card</span> next
                     </p>
                   </motion.div>

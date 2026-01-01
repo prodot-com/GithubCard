@@ -87,7 +87,7 @@ const Intro = ({ user, userId }: IntroProps) => {
         </motion.div>
       </div>
 
-      <div className="fixed bottom-5 md:bottom-3 flex flex-col items-center gap-4 opacity-70">
+      <div className="fixed bottom-5 md:bottom-3 flex flex-col items-center gap-3 opacity-70">
         <p className="text-[9px] font-mono tracking-[0.5em] uppercase text-zinc-500">Initialize Sequence</p>
         <div className="h-px w-48 bg-zinc-800 relative overflow-hidden">
           <motion.div 

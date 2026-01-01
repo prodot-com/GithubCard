@@ -39,8 +39,8 @@ export const WrappedCard = forwardRef<HTMLDivElement, WrappedCardProps>(
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative w-[90vw] md:w-112.5 aspect-4/5 bg-[#0a0a0a] text-zinc-100 p-5 md:p-6 overflow-hidden 
-        flex flex-col justify-between border-3 border-white/60 shadow-[0_0_50px_rgba(0,0,0,1)] font-sans"
+        className="relative w-[90vw] md:w-112.5 aspect-4/5 bg-[#0a0a0a] text-zinc-100 p-4 md:p-6 overflow-hidden 
+        flex flex-col rounded-sm justify-between border-3 border-white/60 shadow-[0_0_50px_rgba(0,0,0,1)] font-sans"
       >
         {/* <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
            <div className="absolute -top-20 -right-20 w-80 h-80 bg-blue-600/20 blur-[120px] rounded-full" />
@@ -56,16 +56,16 @@ export const WrappedCard = forwardRef<HTMLDivElement, WrappedCardProps>(
                     className="w-18 h-18 md:w-25 md:h-25 rounded-full object-cover border border-white/20 transition-all duration-500" 
                 />
                 <div className="absolute bottom-1 -right-1 md:-right-2 bg-white text-black rounded-full p-1">
-                    <Github size={12} className="md:w-3.5" />
+                    <Github size={12} className="md:w-3.5 md:h-3.5" />
                 </div>
             </div>
             <div>
               <p className="text-[10px] md:text-[12px] tracking-[0.3em] uppercase text-zinc-500 font-bold">Identity</p>
-              <h3 className="text-[18px] md:text-[22px] font-bold tracking-tighter">@{username}</h3>
+              <h3 className="text-[18px] md:text-[24px] font-bold tracking-tighter">@{username}</h3>
             </div>
           </div>
           <div className="text-right">
-            <span className="text-[9px] md:text-xs font-mono px-2 py-1 bg-white/5 border border-white/10 rounded uppercase tracking-widest text-zinc-400">
+            <span className="text-[9px] md:text-xs font-mono px-2 py-1 bg-white/5 border border-white/10 rounded-[3px] uppercase tracking-widest text-zinc-400">
               Session 2025
             </span>
           </div>
@@ -78,7 +78,7 @@ export const WrappedCard = forwardRef<HTMLDivElement, WrappedCardProps>(
           </h1>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-3 z-10">
+        <div className="grid grid-cols-2 gap-3 mt-2 md:mt-0 z-10">
           <motion.div variants={item} className="group flex flex-col p-3 md:p-4 bg-white/3 border border-white/5 rounded-[5px] hover:bg-white/6 transition-colors">
             <div className="flex items-center gap-2 text-green-600 mb-1 md:mb-2">
                 <Terminal size={14} />
@@ -109,14 +109,14 @@ export const WrappedCard = forwardRef<HTMLDivElement, WrappedCardProps>(
           </div>
         </motion.div>
 
-        <div className="flex justify-between items-end z-10 pt-3 opacity-40">
-            <div className="flex gap-1 h-6 md:h-8 items-end">
+        <div className="flex justify-between items-center z-10 pt-3 opacity-40">
+            <div className="flex gap-1 h-6 md:h-8 items-center">
                 {[...Array(20)].map((_, i) => (
-                    <div key={i} className="bg-zinc-300 w-[1.5px] md:w-0.5" style={{ height: `${Math.floor(Math.random() * 100)}%` }} />
+                    <div key={i} className="bg-zinc-300 w-[1.5px] md:w-0.5 h-7 md:h-10"  />
                 ))}
             </div>
-            <p className="text-[10px] md:text-[12px] font-mono tracking-wider">
-             <span className="uppercase">Directed by</span> GithubwrapX
+            <p className="text-[10px] md:text-[15px] font-mono tracking-wider">
+             <span className="uppercase"></span> githubwrapX.vercel.app
             </p>
         </div>
       </motion.div>
