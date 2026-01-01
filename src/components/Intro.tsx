@@ -68,7 +68,7 @@ const Intro = ({ user, userId }: IntroProps) => {
             transition={{ delay: 0.6 }}
             className="text-zinc-400 text-lg md:text-xl font-light tracking-tight"
           >
-            A digital archive of your journey, <span className="text-white font-medium underline underline-offset-7 decoration-zinc-700">@{user.login}</span>.
+            A digital archive of your journey, <br className="md:hidden"/><span className="text-white font-medium underline underline-offset-7 decoration-zinc-700">@{user.login}</span>.
           </motion.p>
         </div>
 
@@ -87,7 +87,7 @@ const Intro = ({ user, userId }: IntroProps) => {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30">
+      <div className="fixed bottom-5 md:bottom-3 flex flex-col items-center gap-4 opacity-70">
         <p className="text-[9px] font-mono tracking-[0.5em] uppercase text-zinc-500">Initialize Sequence</p>
         <div className="h-px w-48 bg-zinc-800 relative overflow-hidden">
           <motion.div 
