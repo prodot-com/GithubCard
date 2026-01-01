@@ -18,6 +18,28 @@ const Intro = ({ user, userId }: IntroProps) => {
     <div className="w-full min-h-screen bg-[#050505] text-zinc-100 flex flex-col items-center justify-center overflow-hidden relative">
       {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-green-500/25 blur-[120px] rounded-full pointer-events-none" /> */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-blue-500/25 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-0.75 h-0.75 bg-white rounded-full"
+            animate={{
+              y: [0, -100],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </div>
       
       <div className="z-10 flex flex-col items-center text-center px-6 max-w-4xl">
 

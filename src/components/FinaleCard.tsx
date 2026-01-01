@@ -5,6 +5,7 @@ import React, { useRef } from "react";
 import * as htmlToImage from "html-to-image";
 import { Download, Share2, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import confetti from "canvas-confetti"
 
 type WrappedCardProps = {
   username: string;
@@ -24,17 +25,53 @@ export default function FinalePage(props: WrappedCardProps) {
     try {
       const dataUrl = await htmlToImage.toPng(cardRef.current, {
         cacheBust: true,
-        pixelRatio: 3,
+        pixelRatio: 5,
       });
 
       const link = document.createElement("a");
-      link.download = `github-wrapped-2025-${props.username}.png`;
+      link.download = `GithubwrapX-2025-${props.username}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {
       console.error("Export failed:", err);
     }
   };
+
+  //Magic UI component
+    const showConfetti = () => {
+      const end = Date.now() + 4 * 1000 
+      const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"]
+  
+      const frame = () => {
+        if (Date.now() > end) return
+  
+        confetti({
+          particleCount: 2,
+          angle: 60,
+          spread: 55,
+          startVelocity: 60,
+          origin: { x: 0, y: 0.5 },
+          colors: colors,
+        })
+        confetti({
+          particleCount: 2,
+          angle: 120,
+          spread: 55,
+          startVelocity: 60,
+          origin: { x: 1, y: 0.5 },
+          colors: colors,
+        })
+  
+        requestAnimationFrame(frame)
+      }
+  
+      frame()
+    }
+
+    const handleClick = ()=>{
+      downloadCard(),
+      setTimeout(showConfetti,800)
+    }
 
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100 flex flex-col items-center justify-start md:justify-center px-4 py-12 md:p-8 overflow-y-auto md:overflow-hidden">
@@ -44,10 +81,32 @@ export default function FinalePage(props: WrappedCardProps) {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full" />
       </div> */}
 
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-0.75 h-0.75 bg-indigo-500 rounded-full"
+            animate={{
+              y: [0, -100],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </div>
+
       <motion.div 
         initial={{ opacity: 0, y: -10 }} 
         animate={{ opacity: 1, y: 0 }}
-        className="text-center z-10 mb-6 mt-10 md:mt-0 md:mb-10"
+        className="text-center z-10 mb-6 mt-10 md:mt-0 md:mb-7"
       >
         <h2 className="text-zinc-500 font-mono uppercase tracking-[0.3em] md:tracking-[0.5em] text-[8px] md:text-[10px] mb-2">
           Final Card // 2025
@@ -74,13 +133,15 @@ export default function FinalePage(props: WrappedCardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="flex flex-row md:flex-col gap-6 mt-12 md:mt-0 md:fixed md:right-112 md:bottom-7 z-20"
+          className="flex flex-row md:flex-col gap-6 md:gap-3 mt-12 md:mt-0 md:fixed md:right-117 md:bottom-8.5 z-20"
         >
           <button
-            onClick={downloadCard}
+            onClick={()=>{
+              setTimeout(handleClick, 1500)
+            }}
             title="Download Card"
             className="group flex items-center justify-center bg-zinc-100 text-black
-                     w-14 h-14 md:w-16 md:h-16 rounded-[5px] cursor-pointer 
+                     w-14 h-14 md:w-13 md:h-13 rounded-[5px] cursor-pointer 
                      hover:bg-white transition-all hover:scale-110 active:scale-95 shadow-xl"
           >
             <Download className="w-5 h-5 md:w-6 md:h-6" />
@@ -98,7 +159,7 @@ export default function FinalePage(props: WrappedCardProps) {
             }}
             title="Share with world"
             className="flex items-center justify-center bg-zinc-900 border border-white/20 md:border-white/10 text-white
-                     w-14 h-14 md:w-16 md:h-16 rounded-[5px] cursor-pointer
+                     w-14 h-14 md:w-13 md:h-13 rounded-[5px] cursor-pointer
                      hover:bg-zinc-800 transition-all hover:scale-110 active:scale-95 shadow-xl"
           >
             <Share2 className="w-5 h-5 md:w-6 md:h-6" />

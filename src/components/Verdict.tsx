@@ -79,7 +79,31 @@ export default function QuotePage({ persona, language, commitCount, onQuoteGener
   return (
     <div className="min-h-screen w-full bg-[#050505] text-white flex flex-col items-center justify-center relative overflow-hidden px-4">
       
-      <div className="absolute inset-0 bg-linear-to-t from-green-900/50 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-indigo-900/40 to-transparent pointer-events-none" />
+
+      {status === "finished" && 
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-indigo-500 rounded-full"
+            animate={{
+              y: [0, -100],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </div>
+      }
 
       <div className="z-10 text-center flex flex-col items-center w-full max-w-4xl pb-7">
         
@@ -107,7 +131,7 @@ export default function QuotePage({ persona, language, commitCount, onQuoteGener
               
               <button
                 onClick={fetchAIVerdict}
-                className="group cursor-pointer flex items-center gap-3 md:gap-4 bg-white text-black px-10 md:px-12 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 shadow-2xl"
+                className="group cursor-pointer flex items-center gap-3 md:gap-4 bg-white text-black px-10 md:px-12 py-4 md:py-5 rounded-[5px] font-bold text-base md:text-lg hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 shadow-2xl"
               >
                 <Wand2 size={18} className="md:w-5 md:h-5 group-hover:rotate-12 transition-transform" />
                 Ask AI

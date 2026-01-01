@@ -33,7 +33,7 @@ export const WrappedCard = forwardRef<HTMLDivElement, WrappedCardProps>(
 
     return (
       <div>
-        <div className="absolute z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-blue-500/45 blur-[200px] rounded-full pointer-events-none" />
+        <div className="absolute z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-blue-500/55 blur-[220px] rounded-full pointer-events-none" />
       <motion.div
         ref={ref}
         variants={container}

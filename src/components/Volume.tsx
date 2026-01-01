@@ -21,19 +21,39 @@ export default function VolumePage({ totalCommits, totalRepo, contributedRepo }:
   const rounded = useTransform(count, (latest) => Math.round(latest));
 
   useEffect(() => {
-    const controls = animate(count, totalCommits, { duration: 3, ease: "easeOut" });
+    const controls = animate(count, totalCommits, { duration: 4, ease: "easeInOut" });
     return controls.stop;
   }, [totalCommits, count]);
 
   const copy = getVolumeCopy(totalCommits);
 
   return (
-    <div className="min-h-screen w-full py-20 md:pb-17 bg-[#050505] text-white flex flex-col items-center justify-center relative overflow-hidden px-1 md:px-4">
+    <div className="min-h-screen w-full py-20 md:pb-17 bg-black text-white flex flex-col items-center justify-center relative overflow-hidden px-1 md:px-4">
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 md:w-150 h-75 md:h-150 bg-blue-500/5 blur-[100px] md:blur-[140px] rounded-full pointer-events-none" />
+      {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 md:w-150 h-75 md:h-150 bg-blue-500/5 blur-[100px] md:blur-[140px] rounded-full pointer-events-none" /> */}
 
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] 
-      bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-size-[100%_2px,3px_100%]" />
+      <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-green-400/20 to-black" />
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-0.75 h-0.75 bg-green-500 rounded-full"
+            animate={{
+              y: [0, -100],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </div>
 
       <div className="z-10 text-center flex flex-col items-center w-full">
         <motion.div 
@@ -86,9 +106,9 @@ export default function VolumePage({ totalCommits, totalRepo, contributedRepo }:
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}
-        className="pt-10 md:pt-12 flex flex-col items-center gap-4 px-6"
+        className="relative z-20 pt-10 md:pt-12 flex flex-col items-center gap-4 px-6"
       >
-        <p className="text-zinc-500 italic max-w-xs md:max-w-sm text-center font-serif text-sm md:text-base leading-relaxed">
+        <p className="text-white/75 italic max-w-xs md:max-w-sm text-center font-serif text-sm md:text-base leading-relaxed">
           "{copy.footer}"
         </p>
       </motion.div>

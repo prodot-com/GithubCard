@@ -100,7 +100,7 @@ export default function PersonaPage({ persona, avatarUrl }: PersonaProps) {
         {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-px h-px bg-white/30 rounded-full"
+            className="absolute w-0.75 h-0.75 bg-green-500 rounded-full"
             animate={{
               y: [0, -100],
               opacity: [0, 1, 0],
