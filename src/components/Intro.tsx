@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronRight, Sparkles } from "lucide-react";
-import { BorderBeam } from "@/components/ui/border-beam";
+import { BorderBeam } from "@/src/components/ui/border-beam";
 import "dotenv/config"
 
 type IntroProps = {
