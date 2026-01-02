@@ -62,13 +62,13 @@ export default function Home() {
 
     return () => clearTimeout(timeout);
   }, [username]);
-  
+
 
   useEffect(() => {
   setButtonEnable(
     !!(
       username.trim() &&
-      userDetails?.login.toLowerCase() === username.trim().toLowerCase()
+      userDetails?.login?.toLowerCase() === username.trim().toLowerCase()
     )
   );
   }, [username, userDetails]);
