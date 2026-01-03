@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://githubwrapx.vercel.app/"),
 
   openGraph: {
-    title: "GithubWrapX - Veiw your Github journey",
+    title: "GithubWrapX - View your Github journey",
     description: "Your year in code, get AI quote.",
     url: "https://githubwrapx.vercel.app/",
     siteName: "GitHub Wrapped",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "GithubWrapX - Veiw your Github journey",
+    title: "GithubWrapX - View your Github journey",
     description: "Your year in code, get AI quote.",
     images: ["/og.png"],
   },
